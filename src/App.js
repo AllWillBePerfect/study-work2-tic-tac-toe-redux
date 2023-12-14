@@ -1,25 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
+import {observer} from "mobx-react-lite";
+import CounterClass from "./mobx/Counter";
+import Board from "./components/Board";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const AppMobx = observer(() => {
+    const [counter] = useState(() => CounterClass)
 
-export default App;
+    return (
+        <div className="game">
+            <div className="game-board">
+                <Board xIsNext={counter.xIsNext} squares={counter.currentSquares} onPlay={counter.handlePlay}/>
+            </div>
+        </div>
+    );
+})
+
+
+export default AppMobx;

@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
-import AppMobx from "./App";
+import {Provider} from 'react-redux'
+import store from "./redux/Store";
+import AppRedux from "./App";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <AppMobx />
-// <TimerView timer={myTimer} />, document.body
+    <Provider store={store}>
+        <AppRedux/>
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

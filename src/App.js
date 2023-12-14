@@ -1,20 +1,20 @@
 import './App.css';
-import {useState} from "react";
-import {observer} from "mobx-react-lite";
-import CounterClass from "./mobx/Counter";
+import React from "react";
 import Board from "./components/Board";
+import {useSelector} from "react-redux";
 
-const AppMobx = observer(() => {
-    const [counter] = useState(() => CounterClass)
+function AppRedux() {
+    const xIsNext = useSelector((state) => state.counterRedux.xIsNext)
+    const currentSquares = useSelector((state) => state.counterRedux.currentSquares)
 
     return (
         <div className="game">
             <div className="game-board">
-                <Board xIsNext={counter.xIsNext} squares={counter.currentSquares} onPlay={counter.handlePlay}/>
+                <Board xIsNext={xIsNext} squares={currentSquares}/>
             </div>
         </div>
     );
-})
+}
 
 
-export default AppMobx;
+export default AppRedux;

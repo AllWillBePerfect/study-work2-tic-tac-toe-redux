@@ -1,19 +1,16 @@
 import calculateWinner from "../data/CalculateWinner";
 import Square from "./Square";
+import {handlePlay} from "../redux/CounterRedux";
+import {useDispatch} from "react-redux";
 
-export default function Board({xIsNext, squares, onPlay}) {
+export default function Board({xIsNext, squares}) {
+    const dispatch = useDispatch()
     function onClickListener(i) {
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
-        const nextSquares = squares;
-        if (xIsNext) {
-            nextSquares[i] = 'X';
-        } else {
-            nextSquares[i] = 'O';
-        }
         console.log(".....UI..... = " + i.toString() + ",,,, xIsNext = " + xIsNext.toString())
-        onPlay(nextSquares);
+        dispatch(handlePlay(i))
     }
 
     const winner = calculateWinner(squares);
